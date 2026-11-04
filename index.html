@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vizhnitz in World War I — Records, Front, and Movements</title>
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.js"></script>
+<style>
+  :root{ --ink:#1d1a16; --paper:#f7f3ec; --accent:#8a3324; }
+  *{box-sizing:border-box} html,body{height:100%;margin:0;font-family:Georgia,'Times New Roman',serif;color:var(--ink);background:var(--paper)}
+  #app{display:flex;height:100dvh}
+  #sidebar{width:360px;max-width:92vw;overflow-y:auto;padding:16px 18px;background:var(--paper);border-right:2px solid #d8cfbf;flex-shrink:0}
+  #sidebar h1{font-size:21px;margin:0 0 4px;line-height:1.25}
+  #sidebar .sub{font-size:13px;color:#5c554b;margin:0 0 12px}
+  #sidebar h2{font-size:15px;margin:18px 0 6px;border-bottom:1px solid #d8cfbf;padding-bottom:3px}
+  #sidebar p, #sidebar li{font-size:13.5px;line-height:1.45}
+  .layerctl{display:block;font-size:13.5px;margin:5px 0;cursor:pointer}
+  .swatch{display:inline-block;width:22px;height:0;border-top:4px solid #000;vertical-align:middle;margin-right:7px}
+  .dot{display:inline-block;width:11px;height:11px;border-radius:50%;vertical-align:middle;margin-right:7px;border:2px solid #000}
+  .hollow{background:transparent !important}
+  .step{margin:0 0 9px;padding-left:20px;position:relative;font-size:13.5px;line-height:1.4}
+  .step b{display:block}
+  .step .st{position:absolute;left:0;top:1px;font-size:12px}
+  .done .st{color:#2e6b30}.doing .st{color:#b8860b}.todo .st{color:#999}
+  .rule{background:#efe7d8;border-left:3px solid var(--accent);padding:8px 10px;font-size:13px;line-height:1.45;margin:10px 0}
+  #map{flex:1;min-height:300px}
+  #togglebar{display:none}
+  .mapboxgl-popup-content{font-family:Georgia,serif;font-size:13.5px;line-height:1.45;max-width:300px}
+  .mapboxgl-popup-content h3{margin:0 0 4px;font-size:15px}
+  .mapboxgl-popup-content .d{color:#5c554b;font-size:12.5px;margin-bottom:5px}
+  .mapboxgl-popup-content .c{display:inline-block;font-size:11px;letter-spacing:.04em;text-transform:uppercase;border:1px solid #999;border-radius:3px;padding:1px 5px;margin-bottom:6px}
+  .mapboxgl-popup-content .s{font-size:12px;color:#5c554b;margin-top:6px}
+  @media (max-width:760px){
+    #app{flex-direction:column}
+    #sidebar{width:100%;max-width:100%;height:44dvh;border-right:none;border-bottom:2px solid #d8cfbf}
+    #map{flex:1}
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <aside id="sidebar">
+    <h1>Vizhnitz in World War I</h1>
+    <p class="sub">What happened to the Jewish community of Wiznitz (Vyzhnytsia, Bukovina) and to its records, 1914–1918. Research in progress, versioned. <span id="ver"></span></p>
+
+    <div class="rule"><b>Reading rule for this whole site:</b> loss is not destruction. A missing or re-created register proves <i>loss</i>. “Destroyed” needs its own source. A source that says “destroyed” with no fire, unit, date, eyewitness, or inventory is shown here as an assertion, honestly made, not as proof. Hypothetical routes and mechanisms are dashed or hollow, never solid.</div>
+
+    <h2>Map layers</h2>
+    <div id="layers"></div>
+    <p style="font-size:12.5px;color:#5c554b">Solid = recorded. Dashed / hollow = hypothetical or unresolved. Red markers = records proven lost. Green = records that survived, the counter-examples. Tap any feature for its date, note, and source.</p>
+
+    <h2>Steps taken</h2>
+    <div id="steps"></div>
+
+    <h2>Source files</h2>
+    <p>Full research files live in the project folder and, per release, in this repository under <i>research/</i>: comparative-towns.md, military-leaders.md, movement-records.md, cross-denomination-preservation.md, oradea.md, vyzhnytsia-vital-statistics-access.md. The granular timeline and the Google Drive folder are steps 13–14 below.</p>
+    <p style="font-size:12.5px;color:#5c554b">Basemap © Mapbox © OpenStreetMap contributors. Historical positions are schematic: lines show documented directions of movement, not surveyed front lines, except the Cheremosh line of 30 Jul 1917, which is a reported front position.</p>
+  </aside>
+  <div id="map"></div>
+</div>
+<script src="data.js"></script>
+<script src="steps.js"></script>
+<script>
+const SITE_VERSION = 'v0.1.0';
+document.getElementById('ver').textContent = 'Site ' + SITE_VERSION + '.';
+mapboxgl.accessToken = 'pk.eyJ1IjoibW9zaGViZXJtYW5uIiwiYSI6ImNtdHc5a21odDA0aGMzNG9vNnF6Z3Z6cjAifQ.iO_N_QmWcIANN2aRrfXl_Q';
+
+const LAYERS = [
+  {id:'armies',               label:'War movements of armies',        color:'#40506b', dash:false, on:true},
+  {id:'events',               label:'Recorded events',                color:'#8a3324', dash:false, on:true, dot:true},
+  {id:'jewish_movements',     label:'Jewish movements',               color:'#7a4f9d', dash:false, on:true},
+  {id:'doc_movements_known',  label:'Document movements — known',     color:'#0f766e', dash:false, on:true},
+  {id:'doc_movements_hypothetical', label:'Document movements — hypothetical', color:'#0f766e', dash:true, on:true},
+  {id:'doc_loss_known',       label:'Document loss — proven loss',    color:'#c0262c', dash:false, on:true, dot:true},
+  {id:'doc_loss_hypothetical',label:'Document loss — hypothetical mechanisms', color:'#e08a00', dash:false, on:true, dot:true, hollow:true},
+  {id:'doc_survival',         label:'Records survived (counter-examples)', color:'#2e6b30', dash:false, on:true, dot:true}
+];
+
+const map = new mapboxgl.Map({
+  container:'map',
+  style:'mapbox://styles/mapbox/light-v11',
+  center:[25.0,48.6], zoom:6.2
+});
+map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+
+const ctl = document.getElementById('layers');
+LAYERS.forEach(L=>{
+  const lab=document.createElement('label'); lab.className='layerctl';
+  const sw = L.dot
+    ? '<span class="dot'+(L.hollow?' hollow':'')+'" style="background:'+L.color+';border-color:'+L.color+'"></span>'
+    : '<span class="swatch" style="border-top-color:'+L.color+(L.dash?';border-top-style:dashed':'')+'"></span>';
+  lab.innerHTML='<input type="checkbox" '+(L.on?'checked':'')+' data-layer="'+L.id+'"> '+sw+L.label;
+  ctl.appendChild(lab);
+});
+ctl.addEventListener('change', e=>{
+  const id=e.target.getAttribute('data-layer'); if(!id) return;
+  const vis=e.target.checked?'visible':'none';
+  ['-line','-circle'].forEach(sfx=>{ if(map.getLayer(id+sfx)) map.setLayoutProperty(id+sfx,'visibility',vis); });
+});
+
+map.on('load', ()=>{
+  LAYERS.forEach(L=>{
+    map.addSource(L.id, {type:'geojson', data: MAP_DATA[L.id]});
+    map.addLayer({id:L.id+'-line', type:'line', source:L.id,
+      filter:['==',['geometry-type'],'LineString'],
+      paint:{'line-color':L.color,'line-width':2.4,'line-opacity':0.9,
+             ...(L.dash?{'line-dasharray':[2,2]}:{})}});
+    map.addLayer({id:L.id+'-circle', type:'circle', source:L.id,
+      filter:['==',['geometry-type'],'Point'],
+      paint:{'circle-radius':7,'circle-color': L.hollow? '#ffffff': L.color,
+             'circle-opacity': L.hollow? 0.55: 0.92,
+             'circle-stroke-color':L.color,'circle-stroke-width':2.2}});
+  });
+  const popup=new mapboxgl.Popup({closeButton:true, maxWidth:'320px'});
+  LAYERS.forEach(L=>{
+    map.on('click', L.id+'-circle', e=>{
+      const p=e.features[0].properties;
+      popup.setLngLat(e.lngLat).setHTML(
+        '<h3>'+p.title+'</h3><div class="d">'+(p.date||'')+'</div>'+
+        '<span class="c">'+(p.certainty||'')+'</span><div>'+(p.desc||'')+'</div>'+
+        '<div class="s">Source: '+(p.source||'')+'</div>').addTo(map);
+    });
+    map.on('click', L.id+'-line', e=>{
+      const p=e.features[0].properties;
+      popup.setLngLat(e.lngLat).setHTML(
+        '<h3>'+p.title+'</h3><div class="d">'+(p.date||'')+'</div>'+
+        '<span class="c">'+(p.certainty||'')+'</span><div>'+(p.desc||'')+'</div>'+
+        '<div class="s">Source: '+(p.source||'')+'</div>').addTo(map);
+    });
+    map.on('mouseenter', L.id+'-circle', ()=>map.getCanvas().style.cursor='pointer');
+    map.on('mouseleave', L.id+'-circle', ()=>map.getCanvas().style.cursor='');
+  });
+});
+
+// Steps sidebar (single page, this sidebar)
+const stepsEl=document.getElementById('steps');
+STEPS.forEach((s,i)=>{
+  const d=document.createElement('div');
+  d.className='step '+(s.status==='done'?'done':s.status==='doing'?'doing':'todo');
+  d.innerHTML='<span class="st">'+(s.status==='done'?'✓':s.status==='doing'?'…':'○')+'</span><b>'+(i+1)+'. '+s.title+'</b>'+s.note;
+  stepsEl.appendChild(d);
+});
+</script>
+</body>
+</html>
