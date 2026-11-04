@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.3.0 — 2026-11-04
+
+Two interface additions (MINOR).
+
+- **Timeline tab**: the sidebar now has two tabs, "Map & steps" and
+  "Timeline · 66". The Timeline tab renders the full 66-entry table from
+  research/timeline.md (generated into timeline.js, same source document),
+  with a live text filter. Date conflicts stay flagged in the entries.
+- **Mobile map expand/collapse**: in the mobile split view, an "Expand map"
+  button (bottom right) expands the map to full screen and collapses back
+  to the split ("Show panel"). Desktop layout unchanged.
+
 ## v0.2.0 — 2026-11-04
 
 Deep research folded in (MINOR).

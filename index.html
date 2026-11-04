@@ -26,6 +26,22 @@
   .rule{background:#efe7d8;border-left:3px solid var(--accent);padding:8px 10px;font-size:13px;line-height:1.45;margin:10px 0}
   #map{flex:1;min-height:300px}
   #togglebar{display:none}
+  .tabs{display:flex;gap:6px;margin:12px 0 4px}
+  .tabs button{flex:1;font-family:inherit;font-size:14px;padding:8px 4px;background:#efe7d8;border:1px solid #d8cfbf;border-bottom:3px solid #d8cfbf;cursor:pointer;color:var(--ink)}
+  .tabs button.active{background:var(--paper);border-bottom:3px solid var(--accent);font-weight:bold}
+  #tlFilter{width:100%;font-family:inherit;font-size:14px;padding:7px 9px;margin:8px 0;border:1px solid #d8cfbf;background:#fff}
+  .tlwrap{overflow-x:auto;margin:0 -4px;padding:0 4px}
+  table.tl{border-collapse:collapse;font-size:12.5px;line-height:1.4;min-width:560px}
+  table.tl th, table.tl td{border-bottom:1px solid #e2dac8;padding:5px 6px;text-align:left;vertical-align:top}
+  table.tl th{position:sticky;top:0;background:var(--paper);font-size:12px}
+  table.tl td.d{white-space:nowrap;font-weight:bold}
+  #mapToggle{display:none}
+  @media (max-width:760px){
+    #mapToggle{display:block;position:fixed;right:10px;bottom:12px;z-index:6;font-family:inherit;font-size:14px;padding:10px 14px;background:var(--ink);color:var(--paper);border:none;border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,.35);cursor:pointer}
+    #app.mapfull{flex-direction:column}
+    #app.mapfull #sidebar{display:none}
+    #app.mapfull #map{flex:1;height:100dvh;width:100%}
+  }
   .mapboxgl-popup-content{font-family:Georgia,serif;font-size:13.5px;line-height:1.45;max-width:300px}
   .mapboxgl-popup-content h3{margin:0 0 4px;font-size:15px}
   .mapboxgl-popup-content .d{color:#5c554b;font-size:12.5px;margin-bottom:5px}
@@ -44,6 +60,19 @@
     <h1>Vizhnitz in World War I</h1>
     <p class="sub">What happened to the Jewish community of Wiznitz (Vyzhnytsia, Bukovina) and to its records, 1914–1918. Research in progress, versioned. <span id="ver"></span></p>
 
+    <div class="tabs" role="tablist">
+      <button id="tabBtnOverview" class="active" role="tab">Map &amp; steps</button>
+      <button id="tabBtnTimeline" role="tab">Timeline · 66</button>
+    </div>
+
+    <div id="tabTimeline" hidden>
+      <p style="font-size:13px;line-height:1.45">The 66 dated entries of the deep-research report (section 10). Date conflicts are flagged in the entries, not harmonised. Source keys like [1] and [4] resolve in the full report, under <i>research/</i> in this repository.</p>
+      <input id="tlFilter" type="search" placeholder="Filter the 66 entries (try: Wiznitz, 1916, hostage)…" aria-label="Filter timeline entries">
+      <div class="tlwrap"><table class="tl"><thead><tr><th>Date</th><th>Place</th><th>Event</th><th>Who</th><th>Effect on Jews / records</th><th>Src</th></tr></thead><tbody id="tlBody"></tbody></table></div>
+      <p id="tlCount" style="font-size:12.5px;color:#5c554b"></p>
+    </div>
+
+    <div id="tabOverview">
     <div class="rule"><b>Reading rule for this whole site:</b> loss is not destruction. A missing or re-created register proves <i>loss</i>. “Destroyed” needs its own source. A source that says “destroyed” with no fire, unit, date, eyewitness, or inventory is shown here as an assertion, honestly made, not as proof. Hypothetical routes and mechanisms are dashed or hollow, never solid.</div>
 
     <h2>Map layers</h2>
@@ -56,13 +85,16 @@
     <h2>Source files</h2>
     <p>Full research files live in the project folder and, per release, in this repository under <i>research/</i>: comparative-towns.md, military-leaders.md, movement-records.md, cross-denomination-preservation.md, oradea.md, vyzhnytsia-vital-statistics-access.md. The granular timeline and the Google Drive folder are steps 13–14 below.</p>
     <p style="font-size:12.5px;color:#5c554b">Basemap © Mapbox © OpenStreetMap contributors. Historical positions are schematic: lines show documented directions of movement, not surveyed front lines, except the Cheremosh line of 30 Jul 1917, which is a reported front position.</p>
+    </div>
   </aside>
   <div id="map"></div>
+  <button id="mapToggle" aria-expanded="false">⤢ Expand map</button>
 </div>
 <script src="data.js"></script>
 <script src="steps.js"></script>
+<script src="timeline.js"></script>
 <script>
-const SITE_VERSION = 'v0.2.1';
+const SITE_VERSION = 'v0.3.0';
 document.getElementById('ver').textContent = 'Site ' + SITE_VERSION + '.';
 mapboxgl.accessToken = 'pk.eyJ1IjoibW9zaGViZXJtYW5uIiwiYSI6ImNtdHc5a21odDA0aGMzNG9vNnF6Z3Z6cjAifQ.iO_N_QmWcIANN2aRrfXl_Q';
 
@@ -131,6 +163,52 @@ map.on('load', ()=>{
     map.on('mouseenter', L.id+'-circle', ()=>map.getCanvas().style.cursor='pointer');
     map.on('mouseleave', L.id+'-circle', ()=>map.getCanvas().style.cursor='');
   });
+});
+
+// Tabs: overview (layers + steps) / timeline (the 66-row document)
+const tabBtnOverview=document.getElementById('tabBtnOverview');
+const tabBtnTimeline=document.getElementById('tabBtnTimeline');
+const tabOverview=document.getElementById('tabOverview');
+const tabTimeline=document.getElementById('tabTimeline');
+function showTab(which){
+  const tl = which==='timeline';
+  tabTimeline.hidden=!tl; tabOverview.hidden=tl;
+  tabBtnTimeline.classList.toggle('active', tl);
+  tabBtnOverview.classList.toggle('active', !tl);
+  document.getElementById('sidebar').scrollTop=0;
+}
+tabBtnOverview.addEventListener('click', ()=>showTab('overview'));
+tabBtnTimeline.addEventListener('click', ()=>showTab('timeline'));
+
+// Timeline table (66 entries from research/timeline.md via timeline.js)
+function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+function rich(s){ return esc(s).replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>'); }
+const tlBody=document.getElementById('tlBody');
+const tlCount=document.getElementById('tlCount');
+function renderTimeline(q){
+  const query=(q||'').trim().toLowerCase(); let shown=0;
+  tlBody.innerHTML='';
+  TIMELINE.forEach(r=>{
+    const hay=(r.date+' '+r.place+' '+r.event+' '+r.who+' '+r.effect).toLowerCase();
+    if(query && !hay.includes(query)) return;
+    shown++;
+    const tr=document.createElement('tr');
+    tr.innerHTML='<td class="d">'+esc(r.date)+'</td><td>'+rich(r.place)+'</td><td>'+rich(r.event)+'</td><td>'+esc(r.who)+'</td><td>'+esc(r.effect)+'</td><td>'+esc(r.source)+'</td>';
+    tlBody.appendChild(tr);
+  });
+  tlCount.textContent = query ? shown+' of 66 entries match.' : 'All 66 entries shown.';
+}
+renderTimeline('');
+document.getElementById('tlFilter').addEventListener('input', e=>renderTimeline(e.target.value));
+
+// Mobile split view: expand the map to full screen, collapse back to the split
+const app=document.getElementById('app');
+const mapToggle=document.getElementById('mapToggle');
+mapToggle.addEventListener('click', ()=>{
+  const full=app.classList.toggle('mapfull');
+  mapToggle.textContent = full ? '✕ Show panel' : '⤢ Expand map';
+  mapToggle.setAttribute('aria-expanded', full?'true':'false');
+  setTimeout(()=>map.resize(), 60);
 });
 
 // Steps sidebar (single page, this sidebar)
