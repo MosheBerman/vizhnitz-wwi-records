@@ -1,3 +1,6 @@
+## v0.6.2 — 2026-11-04
+- Scrubber placement corrected per Moshe: on mobile the bar sits beside the Expand map button, in the same bottom row, not above or below it.
+
 ## v0.6.1 — 2026-11-04
 - Scrubber no longer overlaps the mobile "Expand map" button (bar lifts above it on small screens).
 - Year markers (1914–1918) under the scrubber slider.
