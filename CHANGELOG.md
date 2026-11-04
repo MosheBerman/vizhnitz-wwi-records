@@ -1,3 +1,7 @@
+## v0.6.1 — 2026-11-04
+- Scrubber no longer overlaps the mobile "Expand map" button (bar lifts above it on small screens).
+- Year markers (1914–1918) under the scrubber slider.
+
 ## v0.6.0 — 2026-11-04
 - Fronts layer: seven dated front lines (Sep 1914, Dec 1914, Mar 1915, Sep 1915, Jun 1916, Jul 1917, Mar 1918). Six are schematic, drawn from the research's dated anchors and labelled schematic; the 30 Jul 1917 Cheremosh line is a reported position.
 - Chevron arrows along every line, running in the line's direction of movement; they fade with unselected lines during timeline selection, like the lines themselves.
