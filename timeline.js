@@ -1,4 +1,4 @@
-// Generated from research/timeline.md (deep-research report sec. 10). Do not hand-edit; regenerate from the markdown.
+// Generated from research/timeline.md (deep-research report sec. 10) with map coordinates and era colours added. Do not hand-edit; regenerate from the markdown.
 window.TIMELINE = [
  {
   "date": "1774",
@@ -6,7 +6,11 @@ window.TIMELINE = [
   "event": "60 Jewish families / 191 persons recorded",
   "who": "Habsburg administration",
   "effect": "Baseline",
-  "source": "[5]"
+  "source": "[5]",
+  "lng": 25.19,
+  "lat": 48.25,
+  "era": "Before 1914",
+  "color": "#3b2a63"
  },
  {
   "date": "1893",
@@ -14,7 +18,11 @@ window.TIMELINE = [
   "event": "Israel Hager becomes Vizhnitzer Rebbe",
   "who": "Hager court",
   "effect": "Court becomes town's centre",
-  "source": "[2][20]"
+  "source": "[2][20]",
+  "lng": 25.19,
+  "lat": 48.25,
+  "era": "Before 1914",
+  "color": "#3b2a63"
  },
  {
   "date": "by 1900",
@@ -22,7 +30,11 @@ window.TIMELINE = [
   "event": "4,738 Jews in town",
   "who": "—",
   "effect": "Baseline (majority of ~5,300 residents by 1910)",
-  "source": "[5]"
+  "source": "[5]",
+  "lng": 25.19,
+  "lat": 48.25,
+  "era": "Before 1914",
+  "color": "#3b2a63"
  },
  {
   "date": "1903 (or 1905)",
@@ -30,7 +42,11 @@ window.TIMELINE = [
   "event": "Hager founds Ahavat Yisrael yeshiva",
   "who": "Hager court",
   "effect": "Institution; closed 1914",
-  "source": "[20]"
+  "source": "[20]",
+  "lng": 25.19,
+  "lat": 48.25,
+  "era": "Before 1914",
+  "color": "#3b2a63"
  },
  {
   "date": "1912",
@@ -38,7 +54,11 @@ window.TIMELINE = [
   "event": "Rabbinical conference organised by Hager et al.",
   "who": "Hasidic leaders",
   "effect": "Pre-war court influence",
-  "source": "[20]"
+  "source": "[20]",
+  "lng": 25.94,
+  "lat": 48.29,
+  "era": "Before 1914",
+  "color": "#3b2a63"
  },
  {
   "date": "26 July 1914",
@@ -46,7 +66,11 @@ window.TIMELINE = [
   "event": "Partial mobilisation ordered",
   "who": "AH authorities",
   "effect": "Mass Jewish enlistment/patriotism",
-  "source": "[1]"
+  "source": "[1]",
+  "lng": 25.6,
+  "lat": 48.15,
+  "era": "1914",
+  "color": "#8a1c1c"
  },
  {
   "date": "31 Aug 1914",
@@ -54,7 +78,11 @@ window.TIMELINE = [
   "event": "Governor Meran leaves; Pruth bridges blown; city declared open",
   "who": "AH rear guard",
   "effect": "3,000–5,000 Jews flee before Russian entry",
-  "source": "[1]"
+  "source": "[1]",
+  "lng": 25.94,
+  "lat": 48.29,
+  "era": "1914",
+  "color": "#8a1c1c"
  },
  {
   "date": "1 Sep 1914",
@@ -62,7 +90,11 @@ window.TIMELINE = [
   "event": "Plunder on Russian entry (An-sky calendar: attack 28 Aug, flight 31 Aug)",
   "who": "Russian troops/Cossacks",
   "effect": "Jewish homes/shops robbed; killings",
-  "source": "[15][28]"
+  "source": "[15][28]",
+  "lng": 25.96,
+  "lat": 48.35,
+  "era": "1914",
+  "color": "#8a1c1c"
  },
  {
   "date": "2 Sep 1914",
@@ -70,7 +102,11 @@ window.TIMELINE = [
   "event": "Russians occupy; 600,000-rouble tribute demanded in 24h",
   "who": "Gen. Arjutinow's Cossack division",
   "effect": "23 citizens held hostage; torture, arson, plunder",
-  "source": "[1]"
+  "source": "[1]",
+  "lng": 25.94,
+  "lat": 48.29,
+  "era": "1914",
+  "color": "#8a1c1c"
  },
  {
   "date": "3 Sep 1914",
@@ -78,7 +114,11 @@ window.TIMELINE = [
   "event": "Russians take Galicia's capital",
   "who": "Russian 3rd/8th Armies",
   "effect": "—",
-  "source": "[32]"
+  "source": "[32]",
+  "lng": 24.03,
+  "lat": 49.84,
+  "era": "1914",
+  "color": "#8a1c1c"
  },
  {
   "date": "Sep 1914",
@@ -86,7 +126,11 @@ window.TIMELINE = [
   "event": "Russian occupation begins",
   "who": "Russian forces",
   "effect": "Jewish homes ransacked; abuse",
-  "source": "[34]"
+  "source": "[34]",
+  "lng": 25.04,
+  "lat": 48.53,
+  "era": "1914",
+  "color": "#8a1c1c"
  },
  {
   "date": "Sep–Oct 1914",
@@ -94,7 +138,11 @@ window.TIMELINE = [
   "event": "Towns **plundered and set on fire**; synagogues of the area burned",
   "who": "Russian troops",
   "effect": "Town/Jewish property destroyed (buildings)",
-  "source": "[4]"
+  "source": "[4]",
+  "lng": 25.19,
+  "lat": 48.25,
+  "era": "1914",
+  "color": "#8a1c1c"
  },
  {
   "date": "27 Sep 1914",
@@ -102,7 +150,11 @@ window.TIMELINE = [
   "event": "Pogrom by Cossacks",
   "who": "Russian troops",
   "effect": "38–49 Jews killed",
-  "source": "[32]"
+  "source": "[32]",
+  "lng": 24.03,
+  "lat": 49.84,
+  "era": "1914",
+  "color": "#8a1c1c"
  },
  {
   "date": "Mid-Oct 1914",
@@ -110,7 +162,11 @@ window.TIMELINE = [
   "event": "Community president Leib Kalman Retter beaten and murdered defending his wife",
   "who": "Cossacks",
   "effect": "Family fled destitute to Czernowitz",
-  "source": "[3]"
+  "source": "[3]",
+  "lng": 25.96,
+  "lat": 48.35,
+  "era": "1914",
+  "color": "#8a1c1c"
  },
  {
   "date": "21 Oct 1914",
@@ -118,7 +174,11 @@ window.TIMELINE = [
   "event": "Fischer's volunteers retake the city",
   "who": "Col. Eduard Fischer",
   "effect": "More Bukovina families able to flee west",
-  "source": "[1]"
+  "source": "[1]",
+  "lng": 25.94,
+  "lat": 48.29,
+  "era": "1914",
+  "color": "#8a1c1c"
  },
  {
   "date": "Nov 1914 (\"November lull\")",
@@ -126,7 +186,11 @@ window.TIMELINE = [
   "event": "Rosner family leaves Wiznitz for a refugee camp in Bohemia",
   "who": "Wiznitz Jewish family",
   "effect": "Named refugee trajectory; father enlists as NCO",
-  "source": "[4]"
+  "source": "[4]",
+  "lng": 15.2,
+  "lat": 49.9,
+  "era": "1914",
+  "color": "#8a1c1c"
  },
  {
   "date": "Late Nov 1914",
@@ -134,7 +198,11 @@ window.TIMELINE = [
   "event": "Austrian command in town; Sara Schorr brings captured Russian order to HQ",
   "who": "Gen. Schüller, Maj. Papp, 54th ITD",
   "effect": "Jewish civilian aiding AH; open order Zl. 316 (2 Dec) enables her flight to Vienna",
-  "source": "[3]"
+  "source": "[3]",
+  "lng": 25.19,
+  "lat": 48.25,
+  "era": "1914",
+  "color": "#8a1c1c"
  },
  {
   "date": "26 Nov 1914",
@@ -142,7 +210,11 @@ window.TIMELINE = [
   "event": "City evacuated again; Russians reoccupy",
   "who": "Russian Dniester group",
   "effect": "Mayor Weisselberger & Menczel taken hostage, deported to Siberia (Rosner dating; Schmelzer places hostage deportations in first occupation — conflict)",
-  "source": "[1][4]"
+  "source": "[1][4]",
+  "lng": 25.94,
+  "lat": 48.29,
+  "era": "1914",
+  "color": "#8a1c1c"
  },
  {
   "date": "Nov–Dec 1914",
@@ -150,7 +222,11 @@ window.TIMELINE = [
   "event": "**Court of Rabbi Israel Hager destroyed** (fire); his prayer room and R. Mendele's chair survive; chair later taken to Grosswardein",
   "who": "Russian occupation forces (Schmelzer narrative)",
   "effect": "Court building destroyed; Hager leaves (see 1915)",
-  "source": "[1]"
+  "source": "[1]",
+  "lng": 25.19,
+  "lat": 48.25,
+  "era": "1914",
+  "color": "#8a1c1c"
  },
  {
   "date": "Dec 1914",
@@ -158,7 +234,11 @@ window.TIMELINE = [
   "event": "\"Im Dezember mußte Wiznitz geräumt werden\" — town evacuated",
   "who": "AH forces",
   "effect": "Jewish population displaced; custody of registers broken (inference)",
-  "source": "[3]"
+  "source": "[3]",
+  "lng": 25.19,
+  "lat": 48.25,
+  "era": "1914",
+  "color": "#8a1c1c"
  },
  {
   "date": "25 Jan 1915",
@@ -166,7 +246,11 @@ window.TIMELINE = [
   "event": "Yanushkevich circular authorises expulsion of all Jews/suspects from front region",
   "who": "Stavka",
   "effect": "Legal basis for mass expulsions (in force until 1917)",
-  "source": "[9]"
+  "source": "[9]",
+  "lng": 25.45,
+  "lat": 48.3,
+  "era": "1915",
+  "color": "#b3540a"
  },
  {
   "date": "4 Feb 1915",
@@ -174,7 +258,11 @@ window.TIMELINE = [
   "event": "Grand Duke Nicholas orders eviction of Jews \"starting from Bukovina\" + hostages from the prosperous",
   "who": "Supreme Commander",
   "effect": "Bukovina named first in the eviction system",
-  "source": "[8]"
+  "source": "[8]",
+  "lng": 25.45,
+  "lat": 48.3,
+  "era": "1915",
+  "color": "#b3540a"
  },
  {
   "date": "Feb 1915",
@@ -182,7 +270,11 @@ window.TIMELINE = [
   "event": "SW Front bans Jewish entry/movement between provinces; Yiddish press/correspondence bans",
   "who": "Gen. Ivanov's HQ",
   "effect": "Isolation of remaining Jews",
-  "source": "[8][37]"
+  "source": "[8][37]",
+  "lng": 25,
+  "lat": 48.8,
+  "era": "1915",
+  "color": "#b3540a"
  },
  {
   "date": "16 Feb 1915",
@@ -190,7 +282,11 @@ window.TIMELINE = [
   "event": "Pflanzer-Baltin takes Kolomea",
   "who": "AH Armeegruppe",
   "effect": "—",
-  "source": "[12]"
+  "source": "[12]",
+  "lng": 25.04,
+  "lat": 48.53,
+  "era": "1915",
+  "color": "#b3540a"
  },
  {
   "date": "17 Feb 1915",
@@ -198,7 +294,11 @@ window.TIMELINE = [
   "event": "Austrians retake Czernowitz",
   "who": "Pflanzer-Baltin",
   "effect": "Bukovina Jews return begins",
-  "source": "[1][12]"
+  "source": "[1][12]",
+  "lng": 25.94,
+  "lat": 48.29,
+  "era": "1915",
+  "color": "#b3540a"
  },
  {
   "date": "20 Feb 1915",
@@ -206,7 +306,11 @@ window.TIMELINE = [
   "event": "Pflanzer's forces take Stanislau",
   "who": "AH",
   "effect": "—",
-  "source": "[12]"
+  "source": "[12]",
+  "lng": 24.71,
+  "lat": 48.92,
+  "era": "1915",
+  "color": "#b3540a"
  },
  {
   "date": "5 Mar 1915",
@@ -214,7 +318,11 @@ window.TIMELINE = [
   "event": "Yanushkevich clarification: evict all Jews in combat area toward the enemy; take influential hostages",
   "who": "Stavka",
   "effect": "Systematised expulsions",
-  "source": "[8]"
+  "source": "[8]",
+  "lng": 25.45,
+  "lat": 48.3,
+  "era": "1915",
+  "color": "#b3540a"
  },
  {
   "date": "22 Mar 1915",
@@ -222,7 +330,11 @@ window.TIMELINE = [
   "event": "Fortress surrenders after 133-day siege",
   "who": "Russian 11th Army",
   "effect": "—",
-  "source": "[33]"
+  "source": "[33]",
+  "lng": 22.77,
+  "lat": 49.78,
+  "era": "1915",
+  "color": "#b3540a"
  },
  {
   "date": "27 Mar 1915",
@@ -230,7 +342,11 @@ window.TIMELINE = [
   "event": "Yanushkevich telegram: drive Jews \"forward behind the Austrians\"; hostages to Poltava/Chernigov; property sequestration",
   "who": "Stavka",
   "effect": "Property confiscation ordered",
-  "source": "[8]"
+  "source": "[8]",
+  "lng": 25.45,
+  "lat": 48.3,
+  "era": "1915",
+  "color": "#b3540a"
  },
  {
   "date": "7 Apr 1915",
@@ -238,7 +354,11 @@ window.TIMELINE = [
   "event": "Gen. Mavrin confirms strict implementation of eviction/hostage measures",
   "who": "SW Front HQ",
   "effect": "—",
-  "source": "[8]"
+  "source": "[8]",
+  "lng": 24.8,
+  "lat": 49.2,
+  "era": "1915",
+  "color": "#b3540a"
  },
  {
   "date": "15 Apr 1915",
@@ -246,7 +366,11 @@ window.TIMELINE = [
   "event": "Remaining Jews expelled (30 killed at 1914 capture)",
   "who": "Russian forces",
   "effect": "Community removed",
-  "source": "[30]"
+  "source": "[30]",
+  "lng": 25.73,
+  "lat": 48.65,
+  "era": "1915",
+  "color": "#b3540a"
  },
  {
   "date": "Apr–May 1915 (sources differ)",
@@ -254,7 +378,11 @@ window.TIMELINE = [
   "event": "~17,000 Jews expelled east under Russian rule",
   "who": "Russian administration",
   "effect": "Mass expulsion (Watson)",
-  "source": "[33]"
+  "source": "[33]",
+  "lng": 22.77,
+  "lat": 49.78,
+  "era": "1915",
+  "color": "#b3540a"
  },
  {
   "date": "2 May 1915",
@@ -262,7 +390,11 @@ window.TIMELINE = [
   "event": "German/AH breakthrough",
   "who": "Mackensen 11th Army",
   "effect": "Russian retreat from Galicia begins",
-  "source": "[12]"
+  "source": "[12]",
+  "lng": 21.16,
+  "lat": 49.66,
+  "era": "1915",
+  "color": "#b3540a"
  },
  {
   "date": "May 1915",
@@ -270,7 +402,11 @@ window.TIMELINE = [
   "event": "~200,000 Jews expelled",
   "who": "Russian X Army/Stavka",
   "effect": "Largest single expulsion",
-  "source": "[9]"
+  "source": "[9]",
+  "lng": 23.9,
+  "lat": 54.9,
+  "era": "1915",
+  "color": "#b3540a"
  },
  {
   "date": "June 1915",
@@ -278,7 +414,11 @@ window.TIMELINE = [
   "event": "570 adult male Jews marched out as hostages → Kyiv → Chembar (held at Tarnopol until summer 1917 on return attempt)",
   "who": "Russian administration",
   "effect": "Community decapitated",
-  "source": "[37]"
+  "source": "[37]",
+  "lng": 24.61,
+  "lat": 49.41,
+  "era": "1915",
+  "color": "#b3540a"
  },
  {
   "date": "22 June 1915",
@@ -286,7 +426,11 @@ window.TIMELINE = [
   "event": "Böhm-Ermolli retakes Lemberg",
   "who": "AH 2nd Army",
   "effect": "—",
-  "source": "[12]"
+  "source": "[12]",
+  "lng": 24.03,
+  "lat": 49.84,
+  "era": "1915",
+  "color": "#b3540a"
  },
  {
   "date": "6 July 1915 (AJYB dating)",
@@ -294,7 +438,11 @@ window.TIMELINE = [
   "event": "\"Seventy Jews transported to Russia because of alleged treachery\"",
   "who": "Russian forces",
   "effect": "Hostage/deportation entry (may report an earlier event)",
-  "source": "[14]"
+  "source": "[14]",
+  "lng": 25.96,
+  "lat": 48.35,
+  "era": "1915",
+  "color": "#b3540a"
  },
  {
   "date": "1915 (Gelber)",
@@ -302,7 +450,11 @@ window.TIMELINE = [
   "event": "Russians permit Hager to leave with entire court via Romania; Hungarian government directs him to reside in Nagyvarad",
   "who": "Hager court",
   "effect": "Court re-established in Oradea (Schwartz house/synagogue)",
-  "source": "[2][21]"
+  "source": "[2][21]",
+  "lng": 21.93,
+  "lat": 47.05,
+  "era": "1915",
+  "color": "#b3540a"
  },
  {
   "date": "2 Sep 1915",
@@ -310,7 +462,11 @@ window.TIMELINE = [
   "event": "Austrians recapture Brody",
   "who": "Böhm-Ermolli's forces",
   "effect": "—",
-  "source": "[31]"
+  "source": "[31]",
+  "lng": 25.15,
+  "lat": 50.08,
+  "era": "1915",
+  "color": "#b3540a"
  },
  {
   "date": "1915",
@@ -318,7 +474,11 @@ window.TIMELINE = [
   "event": "Community entrusts synagogue antiquities chest to An-sky for St Petersburg museum",
   "who": "Jewish community / An-sky",
   "effect": "Documented WWI safeguarding of Jewish property (by Jews)",
-  "source": "§4.1"
+  "source": "§4.1",
+  "lng": 25.33,
+  "lat": 50.75,
+  "era": "1915",
+  "color": "#b3540a"
  },
  {
   "date": "4 June 1916",
@@ -326,7 +486,11 @@ window.TIMELINE = [
   "event": "Brusilov offensive opens",
   "who": "Brusilov; Lechitsky 9th Army in Bukovina wing",
   "effect": "—",
-  "source": "[27]"
+  "source": "[27]",
+  "lng": 24.8,
+  "lat": 49.2,
+  "era": "1916",
+  "color": "#7a5c00"
  },
  {
   "date": "10 June 1916",
@@ -334,7 +498,11 @@ window.TIMELINE = [
   "event": "Lechitsky breaks Benigni Corps",
   "who": "Russian 9th Army",
   "effect": "—",
-  "source": "[27]"
+  "source": "[27]",
+  "lng": 25.84,
+  "lat": 48.52,
+  "era": "1916",
+  "color": "#7a5c00"
  },
  {
   "date": "17/18 June 1916 (sources differ)",
@@ -342,7 +510,11 @@ window.TIMELINE = [
   "event": "Russians retake Czernowitz",
   "who": "Lechitsky 9th Army",
   "effect": "Third occupation begins",
-  "source": "[1][27]"
+  "source": "[1][27]",
+  "lng": 25.94,
+  "lat": 48.29,
+  "era": "1916",
+  "color": "#7a5c00"
  },
  {
   "date": "June 1916",
@@ -350,7 +522,11 @@ window.TIMELINE = [
   "event": "Russians retake Kolomea (18 or 24 June in different accounts)",
   "who": "9th Army",
   "effect": "—",
-  "source": "[27]"
+  "source": "[27]",
+  "lng": 25.04,
+  "lat": 48.53,
+  "era": "1916",
+  "color": "#7a5c00"
  },
  {
   "date": "By 24 June 1916",
@@ -358,7 +534,11 @@ window.TIMELINE = [
   "event": "Austrians driven out of Bukovina; **Vizhnitz under Russian occupation** (sector inference)",
   "who": "9th Army",
   "effect": "Renewed occupation",
-  "source": "[27]"
+  "source": "[27]",
+  "lng": 25.6,
+  "lat": 48.15,
+  "era": "1916",
+  "color": "#7a5c00"
  },
  {
   "date": "Aug 1916",
@@ -366,7 +546,11 @@ window.TIMELINE = [
   "event": "Romania enters war (27 Aug); first German troops (5th Cav. Div.) fight in Bukovina",
   "who": "Germany/Romania",
   "effect": "Front widened south",
-  "source": "§1 notes"
+  "source": "§1 notes",
+  "lng": 25.9,
+  "lat": 47.9,
+  "era": "1916",
+  "color": "#7a5c00"
  },
  {
   "date": "4 Oct 1916",
@@ -374,7 +558,11 @@ window.TIMELINE = [
   "event": "Trepov becomes governor-general (Ternopil/Chernovtsy)",
   "who": "Russian administration",
   "effect": "Occupation administration phase 2",
-  "source": "[11]"
+  "source": "[11]",
+  "lng": 25.94,
+  "lat": 48.29,
+  "era": "1916",
+  "color": "#7a5c00"
  },
  {
   "date": "June 1917",
@@ -382,7 +570,11 @@ window.TIMELINE = [
   "event": "421,745 refugees still housed; 177,000 \"Israelites\", 41,000 in Vienna; Bukovina initially return-zone C",
   "who": "Interior Ministry",
   "effect": "Return delayed for Bukovina refugees",
-  "source": "[17]"
+  "source": "[17]",
+  "lng": 16.37,
+  "lat": 48.21,
+  "era": "1917",
+  "color": "#1f6f4a"
  },
  {
   "date": "1917",
@@ -390,7 +582,11 @@ window.TIMELINE = [
   "event": "Deported Czernowitz hostages return by various means",
   "who": "—",
   "effect": "Weisselberger, Ebner return",
-  "source": "[1]"
+  "source": "[1]",
+  "lng": 25.94,
+  "lat": 48.29,
+  "era": "1917",
+  "color": "#1f6f4a"
  },
  {
   "date": "1–19 July 1917",
@@ -398,7 +594,11 @@ window.TIMELINE = [
   "event": "Kerensky offensive; Kornilov's 8th Army takes Halicz (10 July), Kalusz (11 July)",
   "who": "Russian 8th Army",
   "effect": "—",
-  "source": "[27]"
+  "source": "[27]",
+  "lng": 24.73,
+  "lat": 49.12,
+  "era": "1917",
+  "color": "#1f6f4a"
  },
  {
   "date": "25 July 1917",
@@ -406,7 +606,11 @@ window.TIMELINE = [
   "event": "Germans retake Tarnopol; city burned in Russian retreat",
   "who": "German/AH",
   "effect": "—",
-  "source": "[27]"
+  "source": "[27]",
+  "lng": 25.59,
+  "lat": 49.55,
+  "era": "1917",
+  "color": "#1f6f4a"
  },
  {
   "date": "3 Aug 1917",
@@ -414,7 +618,11 @@ window.TIMELINE = [
   "event": "Central Powers retake Czernowitz",
   "who": "Kövess 7th Army et al.",
   "effect": "Bukovina reconquered; Vizhnitz returns to AH (inference)",
-  "source": "[12][27]"
+  "source": "[12][27]",
+  "lng": 25.94,
+  "lat": 48.29,
+  "era": "1917",
+  "color": "#1f6f4a"
  },
  {
   "date": "2 Aug / 15 Aug 1917",
@@ -422,7 +630,11 @@ window.TIMELINE = [
   "event": "Doroshenko becomes krai commissar; General-Governorship abolished",
   "who": "Provisional Government",
   "effect": "Occupation ends",
-  "source": "[11]"
+  "source": "[11]",
+  "lng": 25.94,
+  "lat": 48.29,
+  "era": "1917",
+  "color": "#1f6f4a"
  },
  {
   "date": "9 Dec 1917",
@@ -430,7 +642,11 @@ window.TIMELINE = [
   "event": "Armistice with Russia",
   "who": "—",
   "effect": "—",
-  "source": "§1 notes"
+  "source": "§1 notes",
+  "lng": 27.18,
+  "lat": 45.7,
+  "era": "1917",
+  "color": "#1f6f4a"
  },
  {
   "date": "3 Mar 1918",
@@ -438,7 +654,11 @@ window.TIMELINE = [
   "event": "Treaty ends eastern war",
   "who": "—",
   "effect": "—",
-  "source": "§1 notes"
+  "source": "§1 notes",
+  "lng": 23.73,
+  "lat": 52.09,
+  "era": "1918 and after",
+  "color": "#14507a"
  },
  {
   "date": "22 Oct 1918",
@@ -446,7 +666,11 @@ window.TIMELINE = [
   "event": "Jewish National Committee conference",
   "who": "Bukovina Jewish parties",
   "effect": "Self-determination manifesto",
-  "source": "[1]"
+  "source": "[1]",
+  "lng": 25.94,
+  "lat": 48.29,
+  "era": "1918 and after",
+  "color": "#14507a"
  },
  {
   "date": "31 Oct 1918",
@@ -454,7 +678,11 @@ window.TIMELINE = [
   "event": "Mutiny; Jewish self-defence (Schmelzer et al.) protects Jewish areas",
   "who": "Jewish officers/civil guard",
   "effect": "Pogrom largely prevented in Czernowitz",
-  "source": "[1]"
+  "source": "[1]",
+  "lng": 25.94,
+  "lat": 48.29,
+  "era": "1918 and after",
+  "color": "#14507a"
  },
  {
   "date": "6 Nov 1918",
@@ -462,7 +690,11 @@ window.TIMELINE = [
   "event": "Ukrainian committee takes control",
   "who": "Ukrainian National Committee",
   "effect": "—",
-  "source": "[11]"
+  "source": "[11]",
+  "lng": 25.94,
+  "lat": 48.29,
+  "era": "1918 and after",
+  "color": "#14507a"
  },
  {
   "date": "11 Nov 1918",
@@ -470,7 +702,11 @@ window.TIMELINE = [
   "event": "Romanian troops enter; Zadik takes Czernowitz",
   "who": "Romanian 8th Div.",
   "effect": "Forced evacuations of Jews in S. Bukovina villages; homes burnt",
-  "source": "[1][11]"
+  "source": "[1][11]",
+  "lng": 25.94,
+  "lat": 48.29,
+  "era": "1918 and after",
+  "color": "#14507a"
  },
  {
   "date": "28 Nov 1918",
@@ -478,7 +714,11 @@ window.TIMELINE = [
   "event": "General Congress proclaims union with Romania",
   "who": "Flondor government",
   "effect": "Jews evicted/confiscations under martial law follow; Jewish Assembly wins returns",
-  "source": "[1]"
+  "source": "[1]",
+  "lng": 25.94,
+  "lat": 48.29,
+  "era": "1918 and after",
+  "color": "#14507a"
  },
  {
   "date": "Early Nov 1918",
@@ -486,7 +726,11 @@ window.TIMELINE = [
   "event": "Bukovina Land Archives liquidated with Austrian institutions",
   "who": "—",
   "effect": "Archival custody passes to Romanian commission (1924–38 consolidation)",
-  "source": "[24]"
+  "source": "[24]",
+  "lng": 25.94,
+  "lat": 48.29,
+  "era": "1918 and after",
+  "color": "#14507a"
  },
  {
   "date": "Sept 1917 (file level) / labelled 1918",
@@ -494,7 +738,11 @@ window.TIMELINE = [
   "event": "Surviving-**labelled** Jewish register series begins (fond 1245‑1/933); first birth volume actually opens **Sept 1917**",
   "who": "Jewish congregation/metricant",
   "effect": "Registration resumes; pre-1917/18 books unfindable under own labels (LOSS; mislabel risk §15)",
-  "source": "[6][7]"
+  "source": "[6][7]",
+  "lng": 25.19,
+  "lat": 48.25,
+  "era": "1917",
+  "color": "#1f6f4a"
  },
  {
   "date": "1922",
@@ -502,7 +750,11 @@ window.TIMELINE = [
   "event": "Eliezer Hager returns at community's request; yeshiva re-established (1922/23)",
   "who": "Hager court",
   "effect": "Partial communal restoration; Israel stays in Oradea",
-  "source": "[20]"
+  "source": "[20]",
+  "era": "1918 and after",
+  "color": "#14507a",
+  "lng": 25.19,
+  "lat": 48.25
  },
  {
   "date": "1924",
@@ -510,7 +762,11 @@ window.TIMELINE = [
   "event": "Wiznitz-born man needs special marriage permit for lack of a Wiznitz birth certificate",
   "who": "Czernowitz registry",
   "effect": "Documentary trace of the register LOSS",
-  "source": "[7]"
+  "source": "[7]",
+  "lng": 25.94,
+  "lat": 48.29,
+  "era": "1918 and after",
+  "color": "#14507a"
  },
  {
   "date": "1940s",
@@ -518,7 +774,11 @@ window.TIMELINE = [
   "event": "Josef Burg told \"the archives have disappeared\" when seeking replacement ID",
   "who": "DAChO predecessors",
   "effect": "Loss reported as longstanding (inventory level)",
-  "source": "[7]"
+  "source": "[7]",
+  "lng": 25.94,
+  "lat": 48.29,
+  "era": "1918 and after",
+  "color": "#14507a"
  },
  {
   "date": "2 June 1936",
@@ -526,6 +786,10 @@ window.TIMELINE = [
   "event": "Death of R. Israel Hager in exile",
   "who": "—",
   "effect": "Court continues in Oradea under Haim Meir",
-  "source": "[2][20]"
+  "source": "[2][20]",
+  "lng": 21.93,
+  "lat": 47.05,
+  "era": "1918 and after",
+  "color": "#14507a"
  }
 ];

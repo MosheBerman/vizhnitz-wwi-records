@@ -1,5 +1,28 @@
 # Changelog
 
+## v0.4.0 — 2026-11-04
+
+Map/timeline integration and the disproof check (MINOR).
+
+- **Tappable timeline**: all 66 timeline rows now carry coordinates. Tapping
+  a row flies the map to its pin, rings it, and opens its entry; tapping a
+  pin selects and scrolls to the row. On mobile a row tap expands the map.
+- **Timeline pins**: one pin per entry, coloured by historical age with a
+  high-contrast scale (before 1914 deep violet; 1914 deep red; 1915 burnt
+  orange; 1916 dark gold; 1917 deep green; 1918+ deep blue), white-ringed,
+  with the year legend in the layers panel.
+- **Dates and labels on lines**: every line feature now carries its date and
+  name along the line (symbol layer, haloed for contrast).
+- **Layers & legend moved onto the map**: an expandable "Layers & legend"
+  button at the map's top left holds the layer toggles, the timeline-pin
+  toggle, the certainty note, and the year legend. The sidebar keeps the
+  reading rules and the steps.
+- **Disproof check**: a second reading rule, and annotations on the fire
+  features and Hypothesis A: a fire explains a missing register only if it
+  explains the survivors (Kotzman births 1902-1907 in Fond 1245-1/941;
+  Czernowitz, Sadagora, and Wiznitz's Christian books; the partial court
+  fire). New file research/disproof-check.md; steps log now 17 entries.
+
 ## v0.3.0 — 2026-11-04
 
 Two interface additions (MINOR).

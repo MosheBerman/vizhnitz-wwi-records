@@ -30,6 +30,19 @@
   .tabs button{flex:1;font-family:inherit;font-size:14px;padding:8px 4px;background:#efe7d8;border:1px solid #d8cfbf;border-bottom:3px solid #d8cfbf;cursor:pointer;color:var(--ink)}
   .tabs button.active{background:var(--paper);border-bottom:3px solid var(--accent);font-weight:bold}
   #tlFilter{width:100%;font-family:inherit;font-size:14px;padding:7px 9px;margin:8px 0;border:1px solid #d8cfbf;background:#fff}
+  table.tl tbody tr.tap{cursor:pointer}
+  table.tl tbody tr.tap:hover{background:#f1e8d2}
+  table.tl tbody tr.sel{background:#eed9ae}
+  table.tl tbody tr.sel td.d{color:var(--accent)}
+  #mapwrap{position:relative;flex:1;display:flex;min-height:300px}
+  #mapwrap #map{flex:1;min-height:0}
+  #layerPanel{position:absolute;top:10px;left:10px;z-index:5;max-width:290px}
+  #layerPanelBtn{font-family:inherit;font-size:13.5px;padding:8px 12px;background:var(--paper);color:var(--ink);border:1px solid #b9ac93;border-radius:6px;box-shadow:0 1px 5px rgba(0,0,0,.25);cursor:pointer}
+  #layerPanelBody{display:none;background:var(--paper);border:1px solid #b9ac93;border-radius:6px;box-shadow:0 2px 10px rgba(0,0,0,.25);padding:10px 12px;margin-top:6px;max-height:70dvh;overflow-y:auto}
+  #layerPanel.open #layerPanelBody{display:block}
+  #layerPanelBody h3{font-size:13px;margin:8px 0 4px}
+  #layerPanelBody .note{font-size:12px;color:#5c554b;line-height:1.4}
+  .eradot{display:inline-block;width:11px;height:11px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #666;vertical-align:middle;margin-right:7px}
   .tlwrap{overflow-x:auto;margin:0 -4px;padding:0 4px}
   table.tl{border-collapse:collapse;font-size:12.5px;line-height:1.4;min-width:560px}
   table.tl th, table.tl td{border-bottom:1px solid #e2dac8;padding:5px 6px;text-align:left;vertical-align:top}
@@ -40,7 +53,7 @@
     #mapToggle{display:block;position:fixed;right:10px;bottom:12px;z-index:6;font-family:inherit;font-size:14px;padding:10px 14px;background:var(--ink);color:var(--paper);border:none;border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,.35);cursor:pointer}
     #app.mapfull{flex-direction:column}
     #app.mapfull #sidebar{display:none}
-    #app.mapfull #map{flex:1;height:100dvh;width:100%}
+    #app.mapfull #mapwrap{flex:1;height:100dvh;width:100%}
   }
   .mapboxgl-popup-content{font-family:Georgia,serif;font-size:13.5px;line-height:1.45;max-width:300px}
   .mapboxgl-popup-content h3{margin:0 0 4px;font-size:15px}
@@ -75,9 +88,9 @@
     <div id="tabOverview">
     <div class="rule"><b>Reading rule for this whole site:</b> loss is not destruction. A missing or re-created register proves <i>loss</i>. “Destroyed” needs its own source. A source that says “destroyed” with no fire, unit, date, eyewitness, or inventory is shown here as an assertion, honestly made, not as proof. Hypothetical routes and mechanisms are dashed or hollow, never solid.</div>
 
-    <h2>Map layers</h2>
-    <div id="layers"></div>
-    <p style="font-size:12.5px;color:#5c554b">Solid = recorded. Dashed / hollow = hypothetical or unresolved. Red markers = records proven lost. Green = records that survived, the counter-examples. Tap any feature for its date, note, and source.</p>
+    <div class="rule"><b>Disproof check, applied to every fire:</b> before a fire is allowed to explain a missing register, ask what survived it. Pre-1918 Jewish registers from this same fond are on FamilySearch today, Kotzman births 1902–1907 among them (Fond 1245-1/941), and Czernowitz, Sadagora, and Wiznitz's own Christian books all came through the same war. A fire that “destroyed the records” has to explain the survivors, or it explains nothing.</div>
+
+    <p style="font-size:13px"><b>Layers and legend</b> now live on the map itself: tap <i>☰ Layers &amp; legend</i> at the map's top left. Timeline entries are tappable: tap any of the 66 rows and the map flies to its pin, coloured by year.</p>
 
     <h2>Steps taken</h2>
     <div id="steps"></div>
@@ -87,14 +100,28 @@
     <p style="font-size:12.5px;color:#5c554b">Basemap © Mapbox © OpenStreetMap contributors. Historical positions are schematic: lines show documented directions of movement, not surveyed front lines, except the Cheremosh line of 30 Jul 1917, which is a reported front position.</p>
     </div>
   </aside>
-  <div id="map"></div>
+  <div id="mapwrap">
+    <div id="map"></div>
+    <div id="layerPanel">
+      <button id="layerPanelBtn" aria-expanded="false">☰ Layers &amp; legend</button>
+      <div id="layerPanelBody">
+        <h3 style="margin-top:0">Map layers</h3>
+        <div id="layers"></div>
+        <label class="layerctl"><input type="checkbox" id="tlPinsToggle" checked> <span class="dot" style="background:#8a1c1c;border-color:#8a1c1c"></span>Timeline pins (66, coloured by year)</label>
+        <p class="note">Solid = recorded. Dashed / hollow = hypothetical or unresolved. Red markers = records proven lost. Green = records that survived, the counter-examples. Lines carry their date and name along the line. Tap any feature for its date, note, and source.</p>
+        <h3>Timeline pins by year</h3>
+        <div id="eraLegend"></div>
+        <p class="note">Older is deeper. Every pin has a white ring so it stays readable on the light basemap. Pins sit on the entry's place; region-wide entries use the sector or the named destination.</p>
+      </div>
+    </div>
+  </div>
   <button id="mapToggle" aria-expanded="false">⤢ Expand map</button>
 </div>
 <script src="data.js"></script>
 <script src="steps.js"></script>
 <script src="timeline.js"></script>
 <script>
-const SITE_VERSION = 'v0.3.0';
+const SITE_VERSION = 'v0.4.0';
 document.getElementById('ver').textContent = 'Site ' + SITE_VERSION + '.';
 mapboxgl.accessToken = 'pk.eyJ1IjoibW9zaGViZXJtYW5uIiwiYSI6ImNtdHc5a21odDA0aGMzNG9vNnF6Z3Z6cjAifQ.iO_N_QmWcIANN2aRrfXl_Q';
 
@@ -128,7 +155,7 @@ LAYERS.forEach(L=>{
 ctl.addEventListener('change', e=>{
   const id=e.target.getAttribute('data-layer'); if(!id) return;
   const vis=e.target.checked?'visible':'none';
-  ['-line','-circle'].forEach(sfx=>{ if(map.getLayer(id+sfx)) map.setLayoutProperty(id+sfx,'visibility',vis); });
+  ['-line','-circle','-label'].forEach(sfx=>{ if(map.getLayer(id+sfx)) map.setLayoutProperty(id+sfx,'visibility',vis); });
 });
 
 map.on('load', ()=>{
@@ -143,7 +170,34 @@ map.on('load', ()=>{
       paint:{'circle-radius':7,'circle-color': L.hollow? '#ffffff': L.color,
              'circle-opacity': L.hollow? 0.55: 0.92,
              'circle-stroke-color':L.color,'circle-stroke-width':2.2}});
+    map.addLayer({id:L.id+'-label', type:'symbol', source:L.id,
+      filter:['==',['geometry-type'],'LineString'],
+      layout:{'symbol-placement':'line','text-field':['concat',['get','date'],' · ',['get','title']],
+              'text-size':11,'text-font':['Open Sans Semibold','Arial Unicode MS Bold'],
+              'text-max-width':40,'symbol-spacing':260},
+      paint:{'text-color':'#33302a','text-halo-color':'#f7f3ec','text-halo-width':1.6}});
   });
+
+  // Timeline pins: one per timeline entry, coloured by era (historical age)
+  const tlFeatures = TIMELINE.map((r,i)=>({type:'Feature',
+    properties:{idx:i, date:r.date, place:r.place.replace(/\*\*/g,''), event:r.event.replace(/\*\*/g,''), color:r.color, era:r.era},
+    geometry:{type:'Point', coordinates:[r.lng, r.lat]}}));
+  map.addSource('tlpins', {type:'geojson', data:{type:'FeatureCollection', features:tlFeatures}});
+  map.addLayer({id:'tlpins-circle', type:'circle', source:'tlpins',
+    paint:{'circle-radius':6.5,'circle-color':['get','color'],'circle-opacity':0.95,
+           'circle-stroke-color':'#ffffff','circle-stroke-width':2}});
+  map.addSource('tlhl', {type:'geojson', data:{type:'FeatureCollection', features:[]}});
+  map.addLayer({id:'tlhl-ring', type:'circle', source:'tlhl',
+    paint:{'circle-radius':15,'circle-color':'rgba(0,0,0,0)','circle-stroke-color':'#111111','circle-stroke-width':3}});
+  map.on('click', 'tlpins-circle', e=>{
+    const idx=e.features[0].properties.idx;
+    selectTimeline(idx, false);
+    showTab('timeline');
+    const tr=document.querySelector('#tlBody tr[data-idx="'+idx+'"]');
+    if(tr) tr.scrollIntoView({block:'center', behavior:'smooth'});
+  });
+  map.on('mouseenter', 'tlpins-circle', ()=>map.getCanvas().style.cursor='pointer');
+  map.on('mouseleave', 'tlpins-circle', ()=>map.getCanvas().style.cursor='');
   const popup=new mapboxgl.Popup({closeButton:true, maxWidth:'320px'});
   LAYERS.forEach(L=>{
     map.on('click', L.id+'-circle', e=>{
@@ -188,18 +242,62 @@ const tlCount=document.getElementById('tlCount');
 function renderTimeline(q){
   const query=(q||'').trim().toLowerCase(); let shown=0;
   tlBody.innerHTML='';
-  TIMELINE.forEach(r=>{
+  TIMELINE.forEach((r,idx)=>{
     const hay=(r.date+' '+r.place+' '+r.event+' '+r.who+' '+r.effect).toLowerCase();
     if(query && !hay.includes(query)) return;
     shown++;
     const tr=document.createElement('tr');
+    tr.className='tap'; tr.dataset.idx=idx; tr.title='Show on the map';
+    if(idx===selectedTl) tr.classList.add('sel');
     tr.innerHTML='<td class="d">'+esc(r.date)+'</td><td>'+rich(r.place)+'</td><td>'+rich(r.event)+'</td><td>'+esc(r.who)+'</td><td>'+esc(r.effect)+'</td><td>'+esc(r.source)+'</td>';
     tlBody.appendChild(tr);
   });
   tlCount.textContent = query ? shown+' of 66 entries match.' : 'All 66 entries shown.';
 }
+let selectedTl=-1;
 renderTimeline('');
 document.getElementById('tlFilter').addEventListener('input', e=>renderTimeline(e.target.value));
+
+// Tappable timeline rows <-> map pins
+const tlPopup=new mapboxgl.Popup({closeButton:true, maxWidth:'320px'});
+function selectTimeline(idx, fly=true){
+  selectedTl=idx;
+  document.querySelectorAll('#tlBody tr').forEach(tr=>tr.classList.toggle('sel', +tr.dataset.idx===idx));
+  const r=TIMELINE[idx]; if(!r || r.lng===undefined) return;
+  const tgl=document.getElementById('tlPinsToggle');
+  if(tgl && !tgl.checked){ tgl.checked=true; tgl.dispatchEvent(new Event('change')); }
+  if(map.getSource('tlhl')) map.getSource('tlhl').setData({type:'FeatureCollection', features:[{type:'Feature', properties:{}, geometry:{type:'Point', coordinates:[r.lng, r.lat]}}]});
+  if(fly){
+    if(window.innerWidth<=760 && !app.classList.contains('mapfull')) mapToggle.click();
+    map.flyTo({center:[r.lng, r.lat], zoom:Math.max(map.getZoom(), 7.5), speed:0.9});
+  }
+  tlPopup.setLngLat([r.lng, r.lat]).setHTML(
+    '<h3>'+esc(r.date)+' — '+esc(r.place.replace(/\*\*/g,''))+'</h3>'+
+    '<span class="c">'+esc(r.era)+'</span><div>'+esc(r.event.replace(/\*\*/g,''))+'</div>'+
+    '<div class="s">Effect: '+esc(r.effect)+' · Source '+esc(r.source)+'</div>').addTo(map);
+}
+tlBody.addEventListener('click', e=>{
+  const tr=e.target.closest('tr'); if(!tr) return;
+  selectTimeline(+tr.dataset.idx);
+});
+
+// Layers & legend panel on the map
+const layerPanel=document.getElementById('layerPanel');
+const layerPanelBtn=document.getElementById('layerPanelBtn');
+layerPanelBtn.addEventListener('click', ()=>{
+  const open=layerPanel.classList.toggle('open');
+  layerPanelBtn.setAttribute('aria-expanded', open?'true':'false');
+});
+document.getElementById('tlPinsToggle').addEventListener('change', e=>{
+  const vis=e.target.checked?'visible':'none';
+  ['tlpins-circle','tlhl-ring'].forEach(id=>{ if(map.getLayer(id)) map.setLayoutProperty(id,'visibility',vis); });
+});
+const eraLegend=document.getElementById('eraLegend');
+[['Before 1914','#3b2a63'],['1914','#8a1c1c'],['1915','#b3540a'],['1916','#7a5c00'],['1917','#1f6f4a'],['1918 and after','#14507a']].forEach(([label,color])=>{
+  const d=document.createElement('div'); d.className='layerctl';
+  d.innerHTML='<span class="eradot" style="background:'+color+'"></span>'+label;
+  eraLegend.appendChild(d);
+});
 
 // Mobile split view: expand the map to full screen, collapse back to the split
 const app=document.getElementById('app');
