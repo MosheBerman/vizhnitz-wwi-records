@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.5.0 — 2026-11-04
+
+Selection behaviour (MINOR).
+
+- Selecting a timeline entry now fades every unselected map element to a
+  ghost (lines 0.07, points 0.10, labels 0.10, other timeline pins 0.13),
+  leaving the selected pin and any related lines at full strength. A line
+  counts as related when its period covers the entry's year and it passes
+  near the entry's place.
+- The camera follows the selection: it zooms to the pin, or fits out to
+  show the related line(s) when one exists. Tapping the entry again, or
+  closing the popup, restores the full map.
+
 ## v0.4.0 — 2026-11-04
 
 Map/timeline integration and the disproof check (MINOR).
