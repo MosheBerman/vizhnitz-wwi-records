@@ -55,6 +55,11 @@
     #app.mapfull #sidebar{display:none}
     #app.mapfull #mapwrap{flex:1;height:100dvh;width:100%}
   }
+  #scrub{position:absolute;left:50%;transform:translateX(-50%);bottom:10px;z-index:5;display:flex;align-items:center;gap:8px;background:var(--paper);border:1px solid #b9ac93;border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,.25);padding:6px 12px;max-width:94%;font-size:13px}
+  #scrubRange{flex:1;min-width:110px;accent-color:var(--accent)}
+  #scrubLabel{white-space:nowrap;color:#5c554b;font-size:12.5px;overflow:hidden;text-overflow:ellipsis}
+  #scrub button{font-family:inherit;font-size:13px;background:#efe7d8;border:1px solid #b9ac93;border-radius:14px;padding:4px 10px;cursor:pointer;white-space:nowrap}
+  @media (max-width:760px){ #scrubLabel{display:none} }
   .mapboxgl-popup-content{font-family:Georgia,serif;font-size:13.5px;line-height:1.45;max-width:300px}
   .mapboxgl-popup-content h3{margin:0 0 4px;font-size:15px}
   .mapboxgl-popup-content .d{color:#5c554b;font-size:12.5px;margin-bottom:5px}
@@ -88,8 +93,9 @@
     <div id="tabOverview">
     <div class="rule"><b>Reading rule for this whole site:</b> loss is not destruction. A missing or re-created register proves <i>loss</i>. “Destroyed” needs its own source. A source that says “destroyed” with no fire, unit, date, eyewitness, or inventory is shown here as an assertion, honestly made, not as proof. Hypothetical routes and mechanisms are dashed or hollow, never solid.</div>
 
-    <div class="rule"><b>Disproof check, applied to every fire:</b> before a fire is allowed to explain a missing register, ask what survived it. Pre-1918 Jewish registers from this same fond are on FamilySearch today, Kotzman births 1902–1907 among them (Fond 1245-1/941), and Czernowitz, Sadagora, and Wiznitz's own Christian books all came through the same war. A fire that “destroyed the records” has to explain the survivors, or it explains nothing.</div>
+    <div class="rule"><b>Disproof check, applied to every fire:</b> before a fire is allowed to explain a missing register, ask what survived it. Sadagora, named in the same sentence as Wiznitz (“plundered and put on fire”), kept its Jewish vital records, 1855–1930. Czernowitz, occupied three times, kept its Jewish birth books through the war: the 1902–1907 books were read page by page on FamilySearch (Fond 1245, opis 15). Wiznitz's own Christian books came through pre-1918, and the one documented Wiznitz fire, the court's, was partial: prayer room and chair survived. (An earlier version of this page cited “Kotzman births 1902–1907, Fond 1245-1/941” from FamilySearch; a page-level check on 2026-11-04 showed those births are Czernowitz's, and the citation is withdrawn. See step 18.) A fire that “destroyed the records” has to explain the survivors, or it explains nothing.</div>
 
+    <p style="font-size:13px"><b>New in v0.6.0:</b> dated front lines (schematic, except the reported Cheremosh line of 30 Jul 1917), chevron arrows along every line in its direction of movement, and a <b>timeline scrubber</b> under the map: press play, or drag, to watch features appear month by month and the front in force change.</p>
     <p style="font-size:13px"><b>Layers and legend</b> now live on the map itself: tap <i>☰ Layers &amp; legend</i> at the map's top left. Timeline entries are tappable: tap any of the 66 rows and the map flies to its pin, coloured by year.</p>
 
     <h2>Steps taken</h2>
@@ -115,18 +121,25 @@
       </div>
     </div>
   </div>
+  <div id="scrub">
+    <button id="scrubPlay" title="Play the war month by month">▶ Play</button>
+    <input id="scrubRange" type="range" min="0" max="54" step="1" value="0" aria-label="Timeline scrubber, June 1914 to December 1918">
+    <span id="scrubLabel">All dates shown</span>
+    <button id="scrubAll">Show all</button>
+  </div>
   <button id="mapToggle" aria-expanded="false">⤢ Expand map</button>
 </div>
 <script src="data.js"></script>
 <script src="steps.js"></script>
 <script src="timeline.js"></script>
 <script>
-const SITE_VERSION = 'v0.5.0';
+const SITE_VERSION = 'v0.6.0';
 document.getElementById('ver').textContent = 'Site ' + SITE_VERSION + '.';
 mapboxgl.accessToken = 'pk.eyJ1IjoibW9zaGViZXJtYW5uIiwiYSI6ImNtdHc5a21odDA0aGMzNG9vNnF6Z3Z6cjAifQ.iO_N_QmWcIANN2aRrfXl_Q';
 
 const LAYERS = [
   {id:'armies',               label:'War movements of armies',        color:'#40506b', dash:false, on:true},
+  {id:'fronts',               label:'Fronts (dated, schematic)',      color:'#37474f', dash:false, on:true, width:3.2},
   {id:'events',               label:'Recorded events',                color:'#8a3324', dash:false, on:true, dot:true},
   {id:'jewish_movements',     label:'Jewish movements',               color:'#7a4f9d', dash:false, on:true},
   {id:'doc_movements_known',  label:'Document movements — known',     color:'#0f766e', dash:false, on:true},
@@ -155,16 +168,20 @@ LAYERS.forEach(L=>{
 ctl.addEventListener('change', e=>{
   const id=e.target.getAttribute('data-layer'); if(!id) return;
   const vis=e.target.checked?'visible':'none';
-  ['-line','-circle','-label'].forEach(sfx=>{ if(map.getLayer(id+sfx)) map.setLayoutProperty(id+sfx,'visibility',vis); });
+  ['-line','-circle','-label','-chev'].forEach(sfx=>{ if(map.getLayer(id+sfx)) map.setLayoutProperty(id+sfx,'visibility',vis); });
 });
 
 map.on('load', ()=>{
+  const cnv=document.createElement('canvas'); cnv.width=cnv.height=64;
+  const cx2=cnv.getContext('2d'); cx2.strokeStyle='#000'; cx2.lineWidth=11; cx2.lineCap='round'; cx2.lineJoin='round';
+  cx2.beginPath(); cx2.moveTo(20,13); cx2.lineTo(47,32); cx2.lineTo(20,51); cx2.stroke();
+  map.addImage('chevron', cx2.getImageData(0,0,64,64), {sdf:true});
   LAYERS.forEach(L=>{
-    const enriched={type:'FeatureCollection', features: MAP_DATA[L.id].features.map((f,i)=>({type:'Feature', properties:Object.assign({}, f.properties, {fid:L.id+':'+i}), geometry:f.geometry}))};
+    const enriched={type:'FeatureCollection', features: MAP_DATA[L.id].features.map(function(f,i){ const sm=monthIdx(f.properties.date); const props=Object.assign({}, f.properties, {fid:L.id+':'+i}); if(sm!==null) props.smonth=sm; return {type:'Feature', properties:props, geometry:f.geometry}; })};
     map.addSource(L.id, {type:'geojson', data: enriched});
     map.addLayer({id:L.id+'-line', type:'line', source:L.id,
       filter:['==',['geometry-type'],'LineString'],
-      paint:{'line-color':L.color,'line-width':2.4,'line-opacity':0.9,
+      paint:{'line-color':L.color,'line-width':(L.width||2.4),'line-opacity':0.9,
              ...(L.dash?{'line-dasharray':[2,2]}:{})}});
     map.addLayer({id:L.id+'-circle', type:'circle', source:L.id,
       filter:['==',['geometry-type'],'Point'],
@@ -177,11 +194,16 @@ map.on('load', ()=>{
               'text-size':11,'text-font':['Open Sans Semibold','Arial Unicode MS Bold'],
               'text-max-width':40,'symbol-spacing':260},
       paint:{'text-color':'#33302a','text-halo-color':'#f7f3ec','text-halo-width':1.6}});
+    map.addLayer({id:L.id+'-chev', type:'symbol', source:L.id,
+      filter:['==',['geometry-type'],'LineString'],
+      layout:{'symbol-placement':'line','symbol-spacing':120,'icon-image':'chevron','icon-size':0.55,
+              'icon-rotation-alignment':'map','icon-allow-overlap':true,'icon-ignore-placement':true},
+      paint:{'icon-color':L.color,'icon-opacity':0.9}});
   });
 
   // Timeline pins: one per timeline entry, coloured by era (historical age)
   const tlFeatures = TIMELINE.map((r,i)=>({type:'Feature',
-    properties:{idx:i, date:r.date, place:r.place.replace(/\*\*/g,''), event:r.event.replace(/\*\*/g,''), color:r.color, era:r.era},
+    properties:{idx:i, date:r.date, place:r.place.replace(/\*\*/g,''), event:r.event.replace(/\*\*/g,''), color:r.color, era:r.era, smonth:(monthIdx(r.date)===null?0:monthIdx(r.date))},
     geometry:{type:'Point', coordinates:[r.lng, r.lat]}}));
   map.addSource('tlpins', {type:'geojson', data:{type:'FeatureCollection', features:tlFeatures}});
   map.addLayer({id:'tlpins-circle', type:'circle', source:'tlpins',
@@ -283,6 +305,7 @@ function restorePaint(){
     if(map.getLayer(L.id+'-line')) map.setPaintProperty(L.id+'-line','line-opacity',0.9);
     if(map.getLayer(L.id+'-circle')) map.setPaintProperty(L.id+'-circle','circle-opacity', L.hollow?0.55:0.92);
     if(map.getLayer(L.id+'-label')) map.setPaintProperty(L.id+'-label','text-opacity',1);
+    if(map.getLayer(L.id+'-chev')) map.setPaintProperty(L.id+'-chev','icon-opacity',0.9);
   });
   if(map.getLayer('tlpins-circle')) map.setPaintProperty('tlpins-circle','circle-opacity',0.95);
 }
@@ -295,6 +318,8 @@ function applySelection(idx, camera){
     if(map.getLayer(L.id+'-circle')) map.setPaintProperty(L.id+'-circle','circle-opacity',0.10);
     if(map.getLayer(L.id+'-label')) map.setPaintProperty(L.id+'-label','text-opacity',
       ['case', ['in', ['get','fid'], ['literal', fids]], 1, 0.10]);
+    if(map.getLayer(L.id+'-chev')) map.setPaintProperty(L.id+'-chev','icon-opacity',
+      ['case', ['in', ['get','fid'], ['literal', fids]], 0.95, 0.10]);
   });
   if(map.getLayer('tlpins-circle')) map.setPaintProperty('tlpins-circle','circle-opacity',
     ['case', ['==', ['get','idx'], idx], 0.95, 0.13]);
@@ -365,6 +390,59 @@ mapToggle.addEventListener('click', ()=>{
   mapToggle.textContent = full ? '✕ Show panel' : '⤢ Expand map';
   mapToggle.setAttribute('aria-expanded', full?'true':'false');
   setTimeout(()=>map.resize(), 60);
+});
+
+
+// Month index for the scrubber: 0 = Jun 1914, 54 = Dec 1918.
+function monthIdx(s){
+  const m=String(s||'').match(/(1[789]\d\d|20\d\d)(?:-(\d{1,2}))?/);
+  if(!m) return null;
+  const y=+m[1]; if(y<1914) return 0;
+  const mo=m[2]? +m[2] : 1;
+  return Math.max(0,(y-1914)*12+(mo-6));
+}
+const FRONT_MONTHS = MAP_DATA.fronts.features.map(f=>f.properties.fmonth).sort((a,b)=>a-b);
+let scrubT = null, scrubTimer = null;
+const scrubRange = document.getElementById('scrubRange');
+const scrubLabel = document.getElementById('scrubLabel');
+const scrubPlay = document.getElementById('scrubPlay');
+const MONTH_NAMES=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function fmtScrub(t){ const a=t+5; return MONTH_NAMES[a%12]+' '+(1914+Math.floor(a/12)); }
+function activeFrontMonth(t){ let a=-1; FRONT_MONTHS.forEach(fm=>{ if(fm<=t) a=fm; }); return a; }
+function applyScrub(){
+  if(selectedTl>=0) clearSelection();
+  LAYERS.forEach(L=>{
+    const timeCond = scrubT===null ? null : ['any',['!',['has','smonth']],['<=',['get','smonth'],scrubT]];
+    let lineF;
+    if(L.id==='fronts' && scrubT!==null){
+      lineF=['all',['==',['geometry-type'],'LineString'],['==',['get','fmonth'],activeFrontMonth(scrubT)]];
+    } else {
+      lineF = timeCond ? ['all',['==',['geometry-type'],'LineString'],timeCond] : ['==',['geometry-type'],'LineString'];
+    }
+    const ptF = timeCond ? ['all',['==',['geometry-type'],'Point'],timeCond] : ['==',['geometry-type'],'Point'];
+    if(map.getLayer(L.id+'-line')) map.setFilter(L.id+'-line', lineF);
+    if(map.getLayer(L.id+'-label')) map.setFilter(L.id+'-label', lineF);
+    if(map.getLayer(L.id+'-chev')) map.setFilter(L.id+'-chev', lineF);
+    if(map.getLayer(L.id+'-circle')) map.setFilter(L.id+'-circle', ptF);
+  });
+  if(map.getLayer('tlpins-circle')){
+    map.setFilter('tlpins-circle', scrubT===null ? null : ['<=',['get','smonth'],scrubT]);
+  }
+  scrubLabel.textContent = scrubT===null ? 'All dates shown' : fmtScrub(scrubT)+' — dated features up to this month; the front shown is the one in force';
+}
+scrubRange.addEventListener('input', ()=>{ stopPlay(); scrubT=+scrubRange.value; applyScrub(); });
+document.getElementById('scrubAll').addEventListener('click', ()=>{ stopPlay(); scrubT=null; applyScrub(); });
+function stopPlay(){ if(scrubTimer){ clearInterval(scrubTimer); scrubTimer=null; scrubPlay.textContent='▶ Play'; } }
+scrubPlay.addEventListener('click', ()=>{
+  if(scrubTimer){ stopPlay(); return; }
+  if(scrubT===null || scrubT>=54) scrubT=0;
+  scrubPlay.textContent='⏸ Pause';
+  scrubTimer=setInterval(()=>{
+    scrubT++;
+    scrubRange.value=scrubT;
+    applyScrub();
+    if(scrubT>=54) stopPlay();
+  }, 300);
 });
 
 // Steps sidebar (single page, this sidebar)

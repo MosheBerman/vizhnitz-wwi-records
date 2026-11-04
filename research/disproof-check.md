@@ -8,9 +8,23 @@ destruction claim against the records that demonstrably survived.
 "If the 1914 fire destroyed the records, why do we have 1902– birth records
 on FamilySearch?"
 
-- Kotzman (Kitsman) Jewish births **1902–1907** survive in DAChO Fond
-  1245-1/941, the same fond, the same region, the same war. (Deep-research
-  report §3.1.)
+- Czernowitz Jewish birth books **1902–1907** survive and were read entry
+  by entry on FamilySearch (DAChO Fond 1245, opis 15, the Chernivtsi
+  metrical-books record, catalogue 1378569; title pages and entries
+  inspected 2026-11-04). Czernowitz was occupied three times in the same
+  war. WITHDRAWN CITATION: an earlier draft of this file, following the
+  deep-research report §3.1, cited "Kotzman (Kitsman) Jewish births
+  1902–1907 in Fond 1245-1/941" from FamilySearch. The page-level check
+  showed the FamilySearch 1902–1907 births in Fond 1245 are Czernowitz
+  city books (opis 15); the opis 1 file 941 is not in that record at all,
+  and catalogue searches for Kitsman and for Wiznitz returned no titles.
+  Moshe's objection stands: a fire in Wiznitz is not tested by another
+  town's survival unless the comparison answers the fire itself, which is
+  why the lead survivor here is Sadagora (below), named in the same fire
+  sentence as Wiznitz. What opis 1 file 941 actually holds, and whether
+  any pre-1918 Wiznitz Jewish volume survives mislabelled, remain
+  on-ground questions (shelf check, Fond 1245-1 files 925–975). No
+  surviving 1902 Wiznitz records were found; that claim is not made.
 - Czernowitz Jewish records survive in depth (Fond 325, 1780–1944; city BMD
   series from 1841/1856), through three occupations.
 - Sadagora selected vital records survive 1855–1930, though Sadagora burned

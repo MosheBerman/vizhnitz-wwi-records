@@ -1,3 +1,9 @@
+## v0.6.0 — 2026-11-04
+- Fronts layer: seven dated front lines (Sep 1914, Dec 1914, Mar 1915, Sep 1915, Jun 1916, Jul 1917, Mar 1918). Six are schematic, drawn from the research's dated anchors and labelled schematic; the 30 Jul 1917 Cheremosh line is a reported position.
+- Chevron arrows along every line, running in the line's direction of movement; they fade with unselected lines during timeline selection, like the lines themselves.
+- Timeline scrubber under the map: play, or drag month by month (Jun 1914 – Dec 1918). Dated features appear cumulatively up to the chosen month, timeline pins likewise, and the fronts layer shows the one front in force at that month. "Show all" restores the unfiltered map.
+- Correction (Moshe's challenge, page-level FamilySearch check): the "Kotzman births 1902–1907, Fond 1245-1/941" citation is withdrawn. The FamilySearch 1902–1907 births in Fond 1245 are Czernowitz city books (opis 15, catalogue record 1378569; title pages and entries read). The disproof sidebar, Hypothesis A, step 15 and research/disproof-check.md now rest on Sadagora, Czernowitz's verified survivors, and the partial court fire. New steps 18–19 log the check and this release.
+
 # Changelog
 
 ## v0.5.0 — 2026-11-04
